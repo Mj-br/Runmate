@@ -121,3 +121,24 @@ mapsplatform-secrets-plugin = { id = "com.google.android.libraries.mapsplatform.
 runmate-android-application = { id = "runmate.android.application", version = "unspecified" }
 runmate-android-application-compose = { id = "runmate.android.application.compose", version = "unspecified" }
 runmate-android-library = { id = "runmate.android.library", version = "unspecified" }
+runmate-android-library-compose = { id = "runmate.android.library.compose", version = "unspecified" }
+runmate-android-feature-ui = { id = "runmate.android.feature.ui", version = "unspecified" }
+
+[bundles]
+
+compose = [
+    "androidx-activity-compose",
+    "androidx-compose-ui",
+    "androidx-compose-ui-graphics",
+    "androidx-compose-ui-tooling-preview",
+    "androidx-compose-material3",
+    "androidx-lifecycle-runtime-compose",
+    "androidx-lifecycle-viewmodel-compose",
+]
+compose-debug = [
+    "androidx-compose-ui-test-manifest",
+    "androidx-compose-ui-tooling",
+]
+koin = ["koin-core", "koin-android", "koin-android-workmanager"]
+koin-compose = ["koin-core", "koin-android", "koin-android-workmanager", "koin-androidx-compose"]
+

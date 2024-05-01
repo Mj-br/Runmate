@@ -26,5 +26,15 @@ gradlePlugin {
             id = "runmate.android.library"
             implementationClass = "AndroidLibraryConventionPlugin"
         }
+        register("androidLibraryCompose") {
+            id = "runmate.android.library.compose"
+            implementationClass = "AndroidLibraryComposeConventionPlugin"
+        }
+        register("androidFeatureUi") {
+            id = "runmate.android.feature.ui"
+            implementationClass = "AndroidFeatureUiConventionPlugin"
+        }
+
+
     }
 }
