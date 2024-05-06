@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runmate.android.library)
+    alias(libs.plugins.runmate.android.room)
 }
 
 android {
