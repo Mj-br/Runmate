@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.2"
+agp = "8.3.2"
 androidTools = "31.2.2"
 core = "1.10.3"
 playCore = "1.10.3"
@@ -125,6 +125,7 @@ runmate-android-library-compose = { id = "runmate.android.library.compose", vers
 runmate-android-feature-ui = { id = "runmate.android.feature.ui", version = "unspecified" }
 runmate-android-room = { id = "runmate.android.room", version = "unspecified" }
 runmate-jvm-library = { id = "runmate.jvm.library", version = "unspecified" }
+runmate-jvm-ktor = { id = "runmate.jvm.ktor", version = "unspecified" }
 
 [bundles]
 
@@ -143,4 +144,11 @@ compose-debug = [
 ]
 koin = ["koin-core", "koin-android", "koin-android-workmanager"]
 koin-compose = ["koin-core", "koin-android", "koin-android-workmanager", "koin-androidx-compose"]
-
+ktor = [
+    "ktor-client-auth",
+    "ktor-client-cio",
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-logging",
+    "ktor-serialization-kotlinx-json",
+]

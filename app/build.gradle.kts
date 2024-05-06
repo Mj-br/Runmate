@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.runmate.android.application.compose)
+    alias(libs.plugins.runmate.jvm.ktor)
     alias(libs.plugins.mapsplatform.secrets.plugin)
 }
 
