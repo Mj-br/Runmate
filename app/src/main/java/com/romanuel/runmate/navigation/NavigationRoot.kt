@@ -1,4 +1,4 @@
-package com.romanuel.runmate
+package com.romanuel.runmate.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
@@ -8,6 +8,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.romanuel.auth.presentation.intro.IntroScreenRoot
 import com.romanuel.auth.presentation.register.RegisterScreenRoot
+import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
+import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
+import com.romanuel.runmate.navigation.DestinationsScreens.REGISTER
+import com.romanuel.runmate.navigation.GraphsDestinations.AUTH
 
 @Composable
 fun NavigationRoot(
@@ -15,31 +19,32 @@ fun NavigationRoot(
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth"
+        startDestination = AUTH
     ) {
         authGraph(navController)
     }
 }
+
 private fun NavGraphBuilder.authGraph(navController: NavHostController) {
     navigation(
-        startDestination = "intro",
-        route = "auth"
+        startDestination = INTRO,
+        route = AUTH
     ) {
-        composable("intro") {
+        composable(INTRO) {
             IntroScreenRoot(
                 onSignUpClick = {
-                    navController.navigate("register")
+                    navController.navigate(REGISTER)
                 },
                 onSignInClick = {
-                    navController.navigate("login")
+                    navController.navigate(LOGIN)
                 }
             )
         }
-        composable("register") {
+        composable(REGISTER) {
             RegisterScreenRoot(
                 onSignInClick = {
-                    navController.navigate("login") {
-                        popUpTo("register") {
+                    navController.navigate(LOGIN) {
+                        popUpTo(REGISTER) {
                             inclusive = true
                             saveState = true
                         }
@@ -47,7 +52,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                     }
                 },
                 onSuccessfulRegistration = {
-                    navController.navigate("home")
+                    navController.navigate(LOGIN)
                 }
             )
         }
