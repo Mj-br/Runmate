@@ -3,6 +3,7 @@ package com.romanuel.runmate
 import android.app.Application
 import com.romanuel.auth.data.di.authDataModule
 import com.romanuel.auth.presentation.di.authViewModelModule
+import com.romanuel.core.data.di.coreDataModule
 import com.romanuel.runmate.di.appModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.android.ext.koin.androidLogger
@@ -22,7 +23,8 @@ class RunmateApp : Application() {
             modules(
                 authDataModule,
                 authViewModelModule,
-                appModule
+                appModule,
+                coreDataModule
             )
         }
     }

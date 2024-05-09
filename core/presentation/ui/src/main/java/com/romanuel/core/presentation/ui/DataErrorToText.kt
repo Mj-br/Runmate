@@ -1,7 +1,7 @@
-package com.romanuel.presentation.ui
+package com.romanuel.core.presentation.ui
 
 import com.romanuel.core.domain.util.DataError
-import com.romanuel.presentation.ui.UiText.StringResource
+import com.romanuel.core.presentation.ui.UiText.StringResource
 
 fun DataError.asUiText(): UiText = when (this) {
     DataError.Local.DISK_FULL -> StringResource(R.string.error_disk_full)
