@@ -1,4 +1,4 @@
-package com.romanuel.presentation.ui
+package com.romanuel.core.presentation.ui
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

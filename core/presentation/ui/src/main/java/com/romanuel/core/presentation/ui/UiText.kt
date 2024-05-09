@@ -1,4 +1,4 @@
-package com.romanuel.presentation.ui
+package com.romanuel.core.presentation.ui
 
 import android.content.Context
 import androidx.annotation.StringRes
@@ -19,7 +19,6 @@ sealed interface UiText {
             is StringResource -> stringResource(id = id, *args)
         }
 
-    @Composable
     fun asString(context: Context): String =
         when (this) {
             is DynamicString -> value

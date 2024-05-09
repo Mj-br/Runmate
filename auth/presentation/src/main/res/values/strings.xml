@@ -17,4 +17,6 @@
     <string name="sign_in">Sign in</string>
     <string name="sign_up">Sign up</string>
     <string name="welcome_to_runmate">Welcome to Runmate!</string>
+    <string name="error_email_exists">A user with that email already exist.</string>
+    <string name="registration_successful">Registration successful, you can login now!</string>
 </resources>

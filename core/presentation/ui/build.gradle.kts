@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace = "com.romanuel.presentation.ui"
+    namespace = "com.romanuel.core.presentation.ui"
 }
 
 dependencies {
