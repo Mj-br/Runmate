@@ -1,4 +1,4 @@
-package com.romanuel.core.data.networking
+package com.romanuel.core.data.networking.util
 
 import com.romanuel.core.data.BuildConfig
 import com.romanuel.core.domain.util.DataError
