@@ -136,6 +136,7 @@ private fun RegisterScreen(
                         end = offset
                     ).firstOrNull()?.let {
                         onAction(RegisterAction.OnLoginClick)
+                        //TODO: Is not working, find bug
                     }
                 }
             )

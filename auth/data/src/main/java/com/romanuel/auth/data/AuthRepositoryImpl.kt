@@ -2,7 +2,7 @@ package com.romanuel.auth.data
 
 import com.romanuel.auth.data.model.RegisterRequestDTO
 import com.romanuel.auth.domain.AuthRepository
-import com.romanuel.core.data.networking.post
+import com.romanuel.core.data.networking.util.post
 import com.romanuel.core.domain.util.DataError
 import com.romanuel.core.domain.util.EmptyResult
 import io.ktor.client.HttpClient
