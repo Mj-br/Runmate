@@ -1,0 +1,10 @@
+package com.romanuel.core.data.auth.model
+
+import kotlinx.serialization.Serializable
+
+@Serializable
+data class AuthInfoSerializable(
+    val accessToken: String,
+    val refreshToken: String,
+    val userId: String
+)

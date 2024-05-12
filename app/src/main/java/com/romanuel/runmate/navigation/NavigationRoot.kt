@@ -8,21 +8,26 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.romanuel.auth.presentation.intro.IntroScreenRoot
+import com.romanuel.auth.presentation.login.LoginScreenRoot
 import com.romanuel.auth.presentation.register.RegisterScreenRoot
 import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
 import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
 import com.romanuel.runmate.navigation.DestinationsScreens.REGISTER
-import com.romanuel.runmate.navigation.GraphsDestinations.AUTH
+import com.romanuel.runmate.navigation.DestinationsScreens.RUN_OVERVIEW
+import com.romanuel.runmate.navigation.FeatureDestinations.AUTH
+import com.romanuel.runmate.navigation.FeatureDestinations.RUN
 
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean,
 ) {
     NavHost(
         navController = navController,
-        startDestination = AUTH
+        startDestination = if (isLoggedIn) RUN else AUTH
     ) {
         authGraph(navController)
+        runGraph(navController)
     }
 }
 
@@ -58,7 +63,35 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             )
         }
         composable(LOGIN) {
-            Text(text = "Login")
+            LoginScreenRoot(
+                onLoginSuccess = {
+                    navController.navigate(RUN) {
+                        popUpTo(AUTH) {
+                            inclusive = true
+                        }
+                    }
+                },
+                onSignUpClick = {
+                    navController.navigate(REGISTER) {
+                        popUpTo(LOGIN) {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(navController: NavHostController) {
+    navigation(
+        startDestination = RUN_OVERVIEW,
+        route = RUN
+    ) {
+        composable(RUN_OVERVIEW) {
+            Text(text = "run overview")
         }
     }
 }
