@@ -1,4 +1,4 @@
-package com.romanuel.core.domain.model
+package com.romanuel.core.domain.auth
 
 data class AuthInfo(
     val accessToken: String,

@@ -9,7 +9,9 @@ import androidx.navigation.navigation
 import com.romanuel.auth.presentation.intro.IntroScreenRoot
 import com.romanuel.auth.presentation.login.LoginScreenRoot
 import com.romanuel.auth.presentation.register.RegisterScreenRoot
+import com.romanuel.run.presentation.active_run.ActiveRunScreenRoot
 import com.romanuel.run.presentation.run_overview.RunOverviewScreenRoot
+import com.romanuel.runmate.navigation.DestinationsScreens.ACTIVE_RUN
 import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
 import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
 import com.romanuel.runmate.navigation.DestinationsScreens.REGISTER
@@ -91,7 +93,14 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = RUN
     ) {
         composable(RUN_OVERVIEW) {
-            RunOverviewScreenRoot()
+            RunOverviewScreenRoot(
+                onStartRunClick = {
+                    navController.navigate(ACTIVE_RUN)
+                }
+            )
+        }
+        composable(ACTIVE_RUN) {
+            ActiveRunScreenRoot()
         }
     }
 }

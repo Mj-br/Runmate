@@ -85,8 +85,9 @@ fun RegisterScreenRoot(
         onAction = { action ->
             when (action) {
                 is RegisterAction.OnLoginClick -> onSignInClick()
-                else -> viewModel.onAction(action)
+                else -> Unit
             }
+            viewModel.onAction(action)
         }
     )
 }
