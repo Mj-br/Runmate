@@ -59,7 +59,7 @@ private fun RunmateFloatingButtonPreview() {
     RunmateTheme {
         RunmateFloatingActionButton(
             icon = RunIcon,
-            onClick = { /*TODO*/ }
+            onClick = { },
         )
     }
 }

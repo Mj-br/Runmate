@@ -2,6 +2,13 @@
 
 package com.romanuel.run.presentation.active_run
 
+import android.Manifest.permission.ACCESS_COARSE_LOCATION
+import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.POST_NOTIFICATIONS
+import android.os.Build
+import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -11,6 +18,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -39,6 +47,22 @@ private fun ActiveRunScreen(
     state: ActiveRunState,
     onAction: (ActiveRunAction) -> Unit,
 ) {
+
+    val context = LocalContext.current
+    val permissionLauncher =
+        rememberLauncherForActivityResult(
+            contract = RequestMultiplePermissions()
+        ) { permissions ->
+
+            val hasCourseLocationPermission = permissions[ACCESS_COARSE_LOCATION] == true
+            val hasFineLocationPermission = permissions[ACCESS_FINE_LOCATION] == true
+            val hasNotificationPermission = if (Build.VERSION.SDK_INT >= 33) {
+                permissions[POST_NOTIFICATIONS] == true
+            } else true
+
+            val activity = context as ComponentActivity
+        }
+
     RunmateScaffold(
         withGradient = false,
         topAppBar = {
