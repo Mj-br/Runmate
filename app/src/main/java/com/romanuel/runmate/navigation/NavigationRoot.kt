@@ -1,5 +1,6 @@
 package com.romanuel.runmate.navigation
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -12,18 +13,21 @@ import com.romanuel.auth.presentation.register.RegisterScreenRoot
 import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
 import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
 import com.romanuel.runmate.navigation.DestinationsScreens.REGISTER
-import com.romanuel.runmate.navigation.DestinationsScreens.RUN
-import com.romanuel.runmate.navigation.GraphsDestinations.AUTH
+import com.romanuel.runmate.navigation.DestinationsScreens.RUN_OVERVIEW
+import com.romanuel.runmate.navigation.FeatureDestinations.AUTH
+import com.romanuel.runmate.navigation.FeatureDestinations.RUN
 
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean,
 ) {
     NavHost(
         navController = navController,
-        startDestination = AUTH
+        startDestination = if (isLoggedIn) RUN else AUTH
     ) {
         authGraph(navController)
+        runGraph(navController)
     }
 }
 
@@ -69,7 +73,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                 },
                 onSignUpClick = {
                     navController.navigate(REGISTER) {
-                        popUpTo("login") {
+                        popUpTo(LOGIN) {
                             inclusive = true
                             saveState = true
                         }
@@ -77,6 +81,17 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
                     }
                 }
             )
+        }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(navController: NavHostController) {
+    navigation(
+        startDestination = RUN_OVERVIEW,
+        route = RUN
+    ) {
+        composable(RUN_OVERVIEW) {
+            Text(text = "run overview")
         }
     }
 }

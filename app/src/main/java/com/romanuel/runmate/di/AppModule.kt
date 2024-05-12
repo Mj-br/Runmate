@@ -3,7 +3,9 @@ package com.romanuel.runmate.di
 import android.content.SharedPreferences
 import androidx.security.crypto.EncryptedSharedPreferences
 import androidx.security.crypto.MasterKey
+import com.romanuel.runmate.MainViewModel
 import org.koin.android.ext.koin.androidApplication
+import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.dsl.module
 
 private const val SHARED_PREF_NAME = "auth_pref"
@@ -18,4 +20,6 @@ val appModule = module {
             prefValueEncryptionScheme = EncryptedSharedPreferences.PrefValueEncryptionScheme.AES256_GCM
         )
     }
+
+    viewModelOf(::MainViewModel)
 }
