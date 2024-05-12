@@ -1,6 +1,5 @@
 package com.romanuel.runmate.navigation
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
@@ -10,6 +9,7 @@ import androidx.navigation.navigation
 import com.romanuel.auth.presentation.intro.IntroScreenRoot
 import com.romanuel.auth.presentation.login.LoginScreenRoot
 import com.romanuel.auth.presentation.register.RegisterScreenRoot
+import com.romanuel.run.presentation.run_overview.RunOverviewScreenRoot
 import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
 import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
 import com.romanuel.runmate.navigation.DestinationsScreens.REGISTER
@@ -91,7 +91,7 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
         route = RUN
     ) {
         composable(RUN_OVERVIEW) {
-            Text(text = "run overview")
+            RunOverviewScreenRoot()
         }
     }
 }
