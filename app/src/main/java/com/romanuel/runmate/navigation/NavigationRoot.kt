@@ -62,7 +62,7 @@ private fun NavGraphBuilder.authGraph(navController: NavHostController) {
             LoginScreenRoot(
                 onLoginSuccess = {
                     navController.navigate(RUN) {
-                        popUpTo("auth") {
+                        popUpTo(AUTH) {
                             inclusive = true
                         }
                     }
