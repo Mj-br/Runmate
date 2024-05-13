@@ -1,16 +1,21 @@
 package com.romanuel.runmate.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.navDeepLink
 import androidx.navigation.navigation
 import com.romanuel.auth.presentation.intro.IntroScreenRoot
 import com.romanuel.auth.presentation.login.LoginScreenRoot
 import com.romanuel.auth.presentation.register.RegisterScreenRoot
 import com.romanuel.run.presentation.active_run.ActiveRunScreenRoot
+import com.romanuel.run.presentation.active_run.service.ActiveRunService
 import com.romanuel.run.presentation.run_overview.RunOverviewScreenRoot
+import com.romanuel.runmate.MainActivity
+import com.romanuel.runmate.navigation.DeepLinksDestinations.ACTIVE_RUN_DEEP_LINK
 import com.romanuel.runmate.navigation.DestinationsScreens.ACTIVE_RUN
 import com.romanuel.runmate.navigation.DestinationsScreens.INTRO
 import com.romanuel.runmate.navigation.DestinationsScreens.LOGIN
@@ -99,8 +104,33 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                 }
             )
         }
-        composable(ACTIVE_RUN) {
-            ActiveRunScreenRoot()
+        composable(
+            route = ACTIVE_RUN,
+            deepLinks = listOf(
+                navDeepLink {
+                    uriPattern = ACTIVE_RUN_DEEP_LINK
+                }
+            )
+        ) {
+            val context = LocalContext.current
+            ActiveRunScreenRoot(
+                onServiceToggle = { shouldServiceRun ->
+                    if (shouldServiceRun) {
+                        context.startService(
+                            ActiveRunService.createStartIntent(
+                                context = context,
+                                activityClass = MainActivity::class.java
+                            )
+                        )
+                    } else {
+                        context.startService(
+                            ActiveRunService.createStopIntent(
+                                context = context
+                            )
+                        )
+                    }
+                }
+            )
         }
     }
 }

@@ -37,6 +37,7 @@ import com.romanuel.core.presentation.designsystem.components.RunmateToolbar
 import com.romanuel.run.presentation.R
 import com.romanuel.run.presentation.active_run.components.RunDataCard
 import com.romanuel.run.presentation.active_run.maps.TrackerMap
+import com.romanuel.run.presentation.active_run.service.ActiveRunService
 import com.romanuel.run.presentation.util.hasLocationPermission
 import com.romanuel.run.presentation.util.hasNotificationPermission
 import com.romanuel.run.presentation.util.shouldShowLocationPermissionRationale
@@ -45,10 +46,12 @@ import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun ActiveRunScreenRoot(
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     viewModel: ActiveRunViewModel = koinViewModel(),
 ) {
     ActiveRunScreen(
         state = viewModel.state,
+        onServiceToggle = onServiceToggle,
         onAction = viewModel::onAction
     )
 }
@@ -56,6 +59,7 @@ fun ActiveRunScreenRoot(
 @Composable
 private fun ActiveRunScreen(
     state: ActiveRunState,
+    onServiceToggle: (isServiceRunning: Boolean) -> Unit,
     onAction: (ActiveRunAction) -> Unit,
 ) {
 
@@ -109,6 +113,18 @@ private fun ActiveRunScreen(
 
         if (!showLocationRationale && !showNotificationRationale) {
             permissionLauncher.requestRunmatePermissions(context)
+        }
+    }
+
+    LaunchedEffect(key1 = state.isRunFinished) {
+        if (state.isRunFinished) onServiceToggle(false)
+    }
+
+    LaunchedEffect(key1 = state.shouldTrack) {
+        if (context.hasLocationPermission() && state.shouldTrack
+            && !ActiveRunService.isServiceActive
+        ) {
+            onServiceToggle(true)
         }
     }
 
@@ -254,6 +270,7 @@ private fun ActiveRunScreenPreview() {
     RunmateTheme {
         ActiveRunScreen(
             state = ActiveRunState(),
+            onServiceToggle = {},
             onAction = {}
         )
     }

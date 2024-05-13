@@ -1,5 +1,6 @@
 package com.romanuel.runmate.navigation
 
+import com.romanuel.runmate.navigation.DeepLinks.ACTIVE_RUN_DEEP_LINK_ROUTE
 import com.romanuel.runmate.navigation.Features.AUTH_GRAPH_ROUTE
 import com.romanuel.runmate.navigation.Features.RUN_GRAPH_ROUTE
 import com.romanuel.runmate.navigation.Screens.ACTIVE_RUN_SCREEN
@@ -33,4 +34,12 @@ object DestinationsScreens {
     const val REGISTER = REGISTER_SCREEN
     const val RUN_OVERVIEW = RUN_OVERVIEW_SCREEN
     const val ACTIVE_RUN = ACTIVE_RUN_SCREEN
+}
+
+private object DeepLinks {
+    const val ACTIVE_RUN_DEEP_LINK_ROUTE = "runmate://active_run"
+}
+
+object DeepLinksDestinations {
+    const val ACTIVE_RUN_DEEP_LINK = ACTIVE_RUN_DEEP_LINK_ROUTE
 }
