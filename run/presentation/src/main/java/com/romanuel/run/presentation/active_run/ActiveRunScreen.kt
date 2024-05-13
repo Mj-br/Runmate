@@ -28,6 +28,7 @@ import androidx.compose.ui.unit.dp
 import com.romanuel.core.presentation.designsystem.RunmateTheme
 import com.romanuel.core.presentation.designsystem.StartIcon
 import com.romanuel.core.presentation.designsystem.StopIcon
+import com.romanuel.core.presentation.designsystem.components.RunmateActionButton
 import com.romanuel.core.presentation.designsystem.components.RunmateDialog
 import com.romanuel.core.presentation.designsystem.components.RunmateFloatingActionButton
 import com.romanuel.core.presentation.designsystem.components.RunmateOutlinedActionButton
@@ -162,6 +163,34 @@ private fun ActiveRunScreen(
                     .fillMaxWidth()
             )
         }
+    }
+
+    if (!state.shouldTrack && state.hasStartedRunning) {
+        RunmateDialog(
+            title = stringResource(id = R.string.running_is_paused),
+            onDismiss = {
+                onAction(ActiveRunAction.OnResumeRunClick)
+            },
+            description = stringResource(id = R.string.resume_or_finish_run),
+            primaryButton = {
+                RunmateActionButton(
+                    text = stringResource(id = R.string.resume),
+                    isLoading = false,
+                    onClick = {
+                        onAction(ActiveRunAction.OnResumeRunClick)
+                    },
+                    modifier = Modifier.weight(1f)
+                )
+            },
+            secondaryButton = {
+                RunmateOutlinedActionButton(
+                    text = stringResource(id = R.string.finish),
+                    isLoading = state.isSavingRun,
+                    onClick = { onAction(ActiveRunAction.OnFinishRunClick) },
+                    modifier = Modifier.weight(1f)
+                )
+            }
+        )
     }
 
     if (state.showLocationRationale || state.showNotificationRationale) {
