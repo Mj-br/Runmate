@@ -4,8 +4,8 @@ import com.romanuel.core.data.BuildConfig
 import com.romanuel.core.data.networking.model.AccessTokenRequest
 import com.romanuel.core.data.networking.model.AccessTokenResponse
 import com.romanuel.core.data.networking.util.post
-import com.romanuel.core.domain.SessionStorage
-import com.romanuel.core.domain.model.AuthInfo
+import com.romanuel.core.domain.auth.AuthInfo
+import com.romanuel.core.domain.auth.SessionStorage
 import com.romanuel.core.domain.util.Result
 import io.ktor.client.HttpClient
 import io.ktor.client.engine.cio.CIO

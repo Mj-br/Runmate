@@ -1,20 +1,22 @@
 package com.romanuel.runmate.navigation
 
-import com.romanuel.runmate.navigation.FeatureGraphs.AUTH_ROUTE
-import com.romanuel.runmate.navigation.FeatureGraphs.RUN_ROUTE
+import com.romanuel.runmate.navigation.DeepLinks.ACTIVE_RUN_DEEP_LINK_ROUTE
+import com.romanuel.runmate.navigation.Features.AUTH_GRAPH_ROUTE
+import com.romanuel.runmate.navigation.Features.RUN_GRAPH_ROUTE
+import com.romanuel.runmate.navigation.Screens.ACTIVE_RUN_SCREEN
 import com.romanuel.runmate.navigation.Screens.INTRO_SCREEN
 import com.romanuel.runmate.navigation.Screens.LOGIN_SCREEN
 import com.romanuel.runmate.navigation.Screens.REGISTER_SCREEN
 import com.romanuel.runmate.navigation.Screens.RUN_OVERVIEW_SCREEN
 
-private object FeatureGraphs {
-    const val AUTH_ROUTE = "auth"
-    const val RUN_ROUTE = "run"
+private object Features {
+    const val AUTH_GRAPH_ROUTE = "auth"
+    const val RUN_GRAPH_ROUTE = "run"
 }
 
 object FeatureDestinations {
-    const val AUTH = AUTH_ROUTE
-    const val RUN = RUN_ROUTE
+    const val AUTH = AUTH_GRAPH_ROUTE
+    const val RUN = RUN_GRAPH_ROUTE
 }
 
 private object Screens {
@@ -22,6 +24,7 @@ private object Screens {
     const val LOGIN_SCREEN = "login"
     const val REGISTER_SCREEN = "register"
     const val RUN_OVERVIEW_SCREEN = "run_overview"
+    const val ACTIVE_RUN_SCREEN = "active_run"
 }
 
 object DestinationsScreens {
@@ -30,4 +33,13 @@ object DestinationsScreens {
     const val LOGIN = LOGIN_SCREEN
     const val REGISTER = REGISTER_SCREEN
     const val RUN_OVERVIEW = RUN_OVERVIEW_SCREEN
+    const val ACTIVE_RUN = ACTIVE_RUN_SCREEN
+}
+
+private object DeepLinks {
+    const val ACTIVE_RUN_DEEP_LINK_ROUTE = "runmate://active_run"
+}
+
+object DeepLinksDestinations {
+    const val ACTIVE_RUN_DEEP_LINK = ACTIVE_RUN_DEEP_LINK_ROUTE
 }

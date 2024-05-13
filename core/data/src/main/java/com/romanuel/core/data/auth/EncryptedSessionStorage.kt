@@ -4,8 +4,8 @@ import android.content.SharedPreferences
 import com.romanuel.core.data.auth.mapper.toAuthInfo
 import com.romanuel.core.data.auth.mapper.toAuthInfoSerializable
 import com.romanuel.core.data.auth.model.AuthInfoSerializable
-import com.romanuel.core.domain.SessionStorage
-import com.romanuel.core.domain.model.AuthInfo
+import com.romanuel.core.domain.auth.AuthInfo
+import com.romanuel.core.domain.auth.SessionStorage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.encodeToString

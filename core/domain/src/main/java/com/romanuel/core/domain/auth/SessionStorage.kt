@@ -1,6 +1,4 @@
-package com.romanuel.core.domain
-
-import com.romanuel.core.domain.model.AuthInfo
+package com.romanuel.core.domain.auth
 
 interface SessionStorage {
     suspend fun get(): AuthInfo?
