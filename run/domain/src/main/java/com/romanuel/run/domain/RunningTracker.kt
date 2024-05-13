@@ -73,23 +73,28 @@ class RunningTracker(
                 )
             }
             .onEach { location ->
+
                 val currentLocations = runData.value.locations
-                val lastLocationsList = if (currentLocations.isNotEmpty()) {
-                    currentLocations.last() + location
-                } else listOf(location)
+
+                val lastLocationsList =
+                    if (currentLocations.isNotEmpty())
+                        currentLocations.last() + location
+                    else listOf(location)
+
                 val newLocationsList = currentLocations.replaceLast(lastLocationsList)
 
                 val distanceMeters = LocationDataCalculator.getTotalDistanceMeters(
                     locations = newLocationsList
                 )
+
                 val distanceKm = distanceMeters / 1000.0
+
                 val currentDuration = location.durationTimestamp
 
-                val avgSecondsPerKm = if (distanceKm == 0.0) {
-                    0
-                } else {
-                    (currentDuration.inWholeSeconds / distanceKm).roundToInt()
-                }
+                val avgSecondsPerKm =
+                    if (distanceKm == 0.0) 0
+                    else
+                        (currentDuration.inWholeSeconds / distanceKm).roundToInt()
 
                 _runData.update {
                     RunData(
