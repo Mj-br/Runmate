@@ -5,8 +5,8 @@ import com.romanuel.auth.data.model.LoginResponse
 import com.romanuel.auth.data.model.RegisterRequest
 import com.romanuel.auth.domain.AuthRepository
 import com.romanuel.core.data.networking.util.post
-import com.romanuel.core.domain.SessionStorage
 import com.romanuel.core.domain.auth.AuthInfo
+import com.romanuel.core.domain.auth.SessionStorage
 import com.romanuel.core.domain.util.DataError
 import com.romanuel.core.domain.util.EmptyResult
 import com.romanuel.core.domain.util.Result
