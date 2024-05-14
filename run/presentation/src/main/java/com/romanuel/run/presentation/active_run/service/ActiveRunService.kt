@@ -23,8 +23,12 @@ import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import org.koin.android.ext.android.inject
+import timber.log.Timber
+import kotlin.time.Duration
 
 class ActiveRunService : Service() {
+
+    //TODO: There is a bug, where the system constantly emit the notification sound.
 
     private val notificationManager by lazy {
         getSystemService<NotificationManager>()!!
@@ -32,6 +36,7 @@ class ActiveRunService : Service() {
 
     private val baseNotification by lazy {
         NotificationCompat.Builder(applicationContext, CHANNEL_ID)
+            .setOnlyAlertOnce(true)
             .setSmallIcon(logo)
             .setContentTitle(getString(active_run))
     }
@@ -81,16 +86,20 @@ class ActiveRunService : Service() {
     }
 
     private fun updateNotification() {
+        var previousElapsedTime = Duration.ZERO
         runningTracker.elapsedTime.onEach { elapsedTime ->
-            val notification = baseNotification
-                .setContentText(elapsedTime.formatted())
-                .build()
-
-            notificationManager.notify(1, notification)
+            if (elapsedTime.inWholeSeconds > previousElapsedTime.inWholeSeconds) {
+                val notification = baseNotification
+                    .setContentText(elapsedTime.formatted())
+                    .build()
+                Timber.d("Updating notification")
+                notificationManager.notify(1, notification)
+                previousElapsedTime = elapsedTime
+            }
         }.launchIn(serviceScope)
     }
 
-    fun stop() {
+    private fun stop() {
         stopSelf()
         isServiceActive = false
         serviceScope.cancel()
@@ -119,6 +128,7 @@ class ActiveRunService : Service() {
         private const val EXTRA_ACTIVITY_CLASS = "EXTRA_ACTIVITY_CLASS"
 
         private const val APP_PACKAGE_DEEP_LINK = "runmate://active_run"
+
         private const val TIMER_STARTER = "00:00:00"
 
         fun createStartIntent(context: Context, activityClass: Class<*>): Intent {
